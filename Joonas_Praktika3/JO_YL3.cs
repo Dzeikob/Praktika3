@@ -34,21 +34,33 @@ namespace Joonas_Praktika3
                 return;
             }
 
-            JO_ToolBtn_ReadHinnakiri.Enabled = true;
+            JO_ToolBtn_WriteToDB.Enabled = true;
         }
 
         private void JO_ToolBtn_ReadHinnakiri_Click(object sender, EventArgs e)
         {
             ExcelPage page = DbConnection.OpenExcel();
+
+            WriteExcelToDB(page);
+        }
+
+        private void WriteExcelToDB(ExcelPage page)
+        {
             xlApp = page.xlApp;
             xlWorkbook = page.xlWorkbook;
             xlWorksheet = page.xlWorksheet;
-            
+
+            xlRange = xlWorksheet.Cells[3, 4];
+            string nadalString = Convert.ToString(xlRange.Value);
+            int nadal = Convert.ToInt32(nadalString.Split(' ')[1]);
+
+            JO_Progress_Load.Maximum = 3000;
+
             int arv = 0;
             for (int rn = 12; rn < 3000; rn++)
             {
                 xlRange = xlWorksheet.Cells[rn, 4];
-                if(xlRange.Value != null)
+                if (xlRange.Value != null)
                 {
                     //xlRange -- Get information about a certain cell
                     Ex_mas[arv, 3] = Convert.ToString(xlRange.Value);
@@ -61,26 +73,34 @@ namespace Joonas_Praktika3
                     if (Ex_mas[arv, 2] != null)
                         arv++;
                 }
+                JO_Progress_Load.Value++;
             }
-            
+
             for (int i = 0; i < arv; i++)
             {
-                //PartItem item = new PartItem();
-                //item.Hind = Ex_mas[i, 3];
-                //item.TooteGrupp = Ex_mas[i, 0];
-                //item.Tootja = Ex_mas[i, 1];
-                //item.Toode = Ex_mas[i, 2];
-                //MessageBox.Show(item.Hind + " " + item.TooteGrupp + " " + item.Toode + " " + item.Tootja);
-                int id = ExcelQueries.GetGruppID(Ex_mas[i, 0], connection);
-                if(id == -1)
+                //Add Grupp and get ID of it
+                int GruppID = ExcelQueries.GetGruppID(Ex_mas[i, 0], connection);
+                if (GruppID == -1)
                 {
                     ExcelQueries.InsertGruppToDatbase(Ex_mas[i, 0], connection);
+                    GruppID = ExcelQueries.GetGruppID(Ex_mas[i, 0], connection);
                 }
-                
 
-                //ExcelQueries.InsertToDatabase(item, connection);
+                //Add Tootja and get ID of it
+                int TootjaID = ExcelQueries.GetTootjaID(Ex_mas[i, 1], connection);
+                if (TootjaID == -1)
+                {
+                    ExcelQueries.InsertTootjaToDatabase(Ex_mas[i, 1], connection);
+                    TootjaID = ExcelQueries.GetTootjaID(Ex_mas[i, 1], connection);
+                }
+
+                //Send toode to database
+                ExcelQueries.InsertToodeToDatabase(Ex_mas[i, 2], GruppID, TootjaID, connection);
+                int TooteID = ExcelQueries.GetTooteID(Ex_mas[i, 2], connection);
+
+                ExcelQueries.InsertNadalToDatabase(nadal, TooteID, Ex_mas[i, 3], connection);
             }
-            MessageBox.Show("lol");
+            MessageBox.Show("Successfully imported excel to database");
         }
 
         private void JO_YL3_FormClosing(object sender, FormClosingEventArgs e)

@@ -12,3 +12,17 @@ C:\JO_TA16E\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL1.
 C:\JO_TA16E\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL2.resources
 C:\JO_TA16E\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.csproj.ResolveComReference.cache
 C:\JO_TA16E\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL3.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.csprojResolveAssemblyReference.cache
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.csproj.ResolveComReference.cache
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.Form1.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL2.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL3.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.Properties.Resources.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL1.resources
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.csproj.GenerateResource.cache
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.csproj.CoreCompileInputs.cache
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.exe
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.pdb
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.exe.config
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.exe
+D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.pdb

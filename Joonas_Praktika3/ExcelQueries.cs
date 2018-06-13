@@ -30,9 +30,30 @@ namespace Joonas_Praktika3
             OleDbCommand command = new OleDbCommand(query, connection);
             command.ExecuteNonQuery();
         }
-        public static int GetGruppID(string grupp, OleDbConnection connection) //returns null if does not exist
+        public static int GetTooteID(string Toode, OleDbConnection connection)
         {
-            string query = 
+            Toode = Toode.Replace("'", "''");
+
+            string query =
+                "SELECT TooteID FROM Tooted " +
+                $"WHERE Toode = '{Toode}'";
+
+            OleDbCommand command = new OleDbCommand(query, connection);
+            int id = -1;
+
+            object answer = command.ExecuteScalar();
+
+            if (answer != null)
+            {
+                id = (int)answer;
+            }
+
+            return id; //Return -1 if not found
+        }
+
+        public static int GetGruppID(string grupp, OleDbConnection connection)
+        {
+            string query =
                 "SELECT GruppID FROM Grupid " +
                 $"WHERE Grupp = '{grupp}'";
 
@@ -41,7 +62,7 @@ namespace Joonas_Praktika3
 
             object answer = command.ExecuteScalar();
 
-            if(answer != null)
+            if (answer != null)
             {
                 id = (int)answer;
             }
@@ -56,6 +77,39 @@ namespace Joonas_Praktika3
             OleDbCommand command = new OleDbCommand(query, connection);
             command.ExecuteNonQuery();
         }
+        public static int GetTootjaID(string tootja, OleDbConnection connection)
+        {
+            string query =
+                "SELECT TootjaID FROM Tootjad " +
+                $"WHERE Tootja = '{tootja}'";
+
+            OleDbCommand command = new OleDbCommand(query, connection);
+            int id = -1;
+
+            object answer = command.ExecuteScalar();
+
+            if (answer != null)
+            {
+                id = (int)answer;
+            }
+
+            return id; //Return -1 if not found
+        }
+        public static void InsertTootjaToDatabase(string tootja, OleDbConnection connection)
+        {
+            string query = "INSERT INTO Tootjad (Tootja) " +
+            $"VALUES ('{tootja}')";
+            OleDbCommand command = new OleDbCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
+        public static void InsertNadalToDatabase(int nadal, int TooteID, string Hind, OleDbConnection connection)
+        {
+            string query = "INSERT INTO Nadalad (Nadal, TooteID, Hind) " +
+            $"VALUES ({nadal}, {TooteID}, '{Hind}')";
+            OleDbCommand command = new OleDbCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
+        
 
     }
 }
