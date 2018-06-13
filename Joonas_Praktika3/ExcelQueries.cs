@@ -37,17 +37,24 @@ namespace Joonas_Praktika3
                 $"WHERE Grupp = '{grupp}'";
 
             OleDbCommand command = new OleDbCommand(query, connection);
+            int id = -1;
 
-            int id = (int)command.ExecuteScalar();
-            if(id == null)
+            object answer = command.ExecuteScalar();
+
+            if(answer != null)
             {
-                return -1;
+                id = (int)answer;
             }
-            else
-            {
-                return Convert.ToInt32(id);
-            }
-            
+
+            return id; //Return -1 if not found
+        }
+        public static void InsertGruppToDatbase(string grupp, OleDbConnection connection)
+        {
+            string query = "INSERT INTO Grupid (Grupp) " +
+            $"VALUES ('{grupp}')";
+
+            OleDbCommand command = new OleDbCommand(query, connection);
+            command.ExecuteNonQuery();
         }
 
     }

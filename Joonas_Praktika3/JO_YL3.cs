@@ -43,9 +43,6 @@ namespace Joonas_Praktika3
             xlApp = page.xlApp;
             xlWorkbook = page.xlWorkbook;
             xlWorksheet = page.xlWorksheet;
-
-            MessageBox.Show(ExcelQueries.GetGruppID("lol", connection).ToString());
-            return;
             
             int arv = 0;
             for (int rn = 12; rn < 3000; rn++)
@@ -68,14 +65,22 @@ namespace Joonas_Praktika3
             
             for (int i = 0; i < arv; i++)
             {
-                PartItem item = new PartItem();
-                item.Hind = Ex_mas[i, 3];
-                item.TooteGrupp = Ex_mas[i, 0];
-                item.Tootja = Ex_mas[i, 1];
-                item.Toode = Ex_mas[i, 2];
+                //PartItem item = new PartItem();
+                //item.Hind = Ex_mas[i, 3];
+                //item.TooteGrupp = Ex_mas[i, 0];
+                //item.Tootja = Ex_mas[i, 1];
+                //item.Toode = Ex_mas[i, 2];
                 //MessageBox.Show(item.Hind + " " + item.TooteGrupp + " " + item.Toode + " " + item.Tootja);
-                ExcelQueries.InsertToDatabase(item, connection);
+                int id = ExcelQueries.GetGruppID(Ex_mas[i, 0], connection);
+                if(id == -1)
+                {
+                    ExcelQueries.InsertGruppToDatbase(Ex_mas[i, 0], connection);
+                }
+                
+
+                //ExcelQueries.InsertToDatabase(item, connection);
             }
+            MessageBox.Show("lol");
         }
 
         private void JO_YL3_FormClosing(object sender, FormClosingEventArgs e)
