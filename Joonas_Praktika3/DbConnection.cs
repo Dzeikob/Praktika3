@@ -30,25 +30,30 @@ namespace Joonas_Praktika3
                 return null;
             }   
         }
-        public static ExcelPage OpenExcel()
+        public static List<ExcelPage> OpenExcel()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Excel files | *.XLS; *.XLSX; *XLSM;";
-
+            ofd.Multiselect = true;
             DialogResult result = ofd.ShowDialog();
+            List<ExcelPage> pages = new List<ExcelPage>();
             if (result == DialogResult.OK)
             {
-                ExcelPage page = new ExcelPage();
+                foreach (var item in ofd.FileNames)
+                {
+                    ExcelPage page = new ExcelPage();
 
-                Excel.Application xlApp = new Excel.Application();
-                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(ofd.FileName);
-                Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets["Täishinnakiri"];
+                    Excel.Application xlApp = new Excel.Application();
+                    Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(item);
+                    Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets["Täishinnakiri"];
 
-                page.xlApp = xlApp;
-                page.xlWorkbook = xlWorkbook;
-                page.xlWorksheet = xlWorksheet;
+                    page.xlApp = xlApp;
+                    page.xlWorkbook = xlWorkbook;
+                    page.xlWorksheet = xlWorksheet;
 
-                return page;
+                    pages.Add(page);
+                }
+                return pages;
             }
             else
             {

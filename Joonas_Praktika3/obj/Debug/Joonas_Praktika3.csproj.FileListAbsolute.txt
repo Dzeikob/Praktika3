@@ -26,3 +26,4 @@ D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.pdb
 D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.exe.config
 D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.exe
 D:\Projektid\Joonas_Praktika3\Joonas_Praktika3\bin\Debug\Joonas_Praktika3.pdb
+C:\JO_TA16E\Joonas_Praktika3\Joonas_Praktika3\obj\Debug\Joonas_Praktika3.JO_YL4.resources

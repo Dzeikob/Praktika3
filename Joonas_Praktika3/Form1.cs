@@ -19,7 +19,7 @@ namespace Joonas_Praktika3
         Form form1 = new JO_YL1();
         Form form2 = new JO_YL2();
         Form form3 = new JO_YL3();
-        //Form form4 = new JO_YL4();
+        Form form4 = new JO_YL4();
         //Form form5 = new JO_YL5();
         //Form form6 = new JO_YL6();
 
@@ -46,7 +46,9 @@ namespace Joonas_Praktika3
 
         private void JO_Btn_YL4_Click(object sender, EventArgs e)
         {
-
+            if (form4.Visible == false) form4 = new JO_YL4();
+            form4.Visible = true;
+            form4.Activate();
         }
     }
 }

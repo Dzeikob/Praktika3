@@ -43,7 +43,7 @@
             this.JO_ToolBtn_WriteToDB});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(172, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(179, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -64,13 +64,13 @@
             this.JO_ToolBtn_WriteToDB.Image = ((System.Drawing.Image)(resources.GetObject("JO_ToolBtn_WriteToDB.Image")));
             this.JO_ToolBtn_WriteToDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.JO_ToolBtn_WriteToDB.Name = "JO_ToolBtn_WriteToDB";
-            this.JO_ToolBtn_WriteToDB.Size = new System.Drawing.Size(100, 19);
+            this.JO_ToolBtn_WriteToDB.Size = new System.Drawing.Size(100, 22);
             this.JO_ToolBtn_WriteToDB.Text = "Write excel to DB";
             this.JO_ToolBtn_WriteToDB.Click += new System.EventHandler(this.JO_ToolBtn_ReadHinnakiri_Click);
             // 
             // JO_Progress_Load
             // 
-            this.JO_Progress_Load.Location = new System.Drawing.Point(12, 40);
+            this.JO_Progress_Load.Location = new System.Drawing.Point(12, 28);
             this.JO_Progress_Load.Name = "JO_Progress_Load";
             this.JO_Progress_Load.Size = new System.Drawing.Size(149, 23);
             this.JO_Progress_Load.TabIndex = 3;
@@ -79,7 +79,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(172, 74);
+            this.ClientSize = new System.Drawing.Size(179, 74);
             this.Controls.Add(this.JO_Progress_Load);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));

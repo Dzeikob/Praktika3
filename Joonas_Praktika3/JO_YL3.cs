@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
@@ -39,13 +40,29 @@ namespace Joonas_Praktika3
 
         private void JO_ToolBtn_ReadHinnakiri_Click(object sender, EventArgs e)
         {
-            ExcelPage page = DbConnection.OpenExcel();
+            
+            List<ExcelPage> pages = DbConnection.OpenExcel();
 
-            WriteExcelToDB(page);
+            ExcelQueries.ClearGrupidTable(connection);
+            ExcelQueries.ClearTootjadTable(connection);
+            ExcelQueries.ClearTootedTable(connection);
+            ExcelQueries.ClearNadalTable(connection);
+            
+
+            JO_Progress_Load.Maximum = pages.Count * 3000;
+            foreach (var page in pages)
+            {         
+                WriteExcelToDB(page);
+            }
+            MessageBox.Show("Successfully imported excel to database ");
         }
 
         private void WriteExcelToDB(ExcelPage page)
         {
+            Stopwatch watch = new Stopwatch();
+
+            watch.Start();
+
             xlApp = page.xlApp;
             xlWorkbook = page.xlWorkbook;
             xlWorksheet = page.xlWorksheet;
@@ -54,7 +71,11 @@ namespace Joonas_Praktika3
             string nadalString = Convert.ToString(xlRange.Value);
             int nadal = Convert.ToInt32(nadalString.Split(' ')[1]);
 
-            JO_Progress_Load.Maximum = 3000;
+            watch.Stop();
+            int SetupTime = watch.Elapsed.Milliseconds;
+            watch.Reset();
+
+            watch.Start();
 
             int arv = 0;
             for (int rn = 12; rn < 3000; rn++)
@@ -76,6 +97,11 @@ namespace Joonas_Praktika3
                 JO_Progress_Load.Value++;
             }
 
+            watch.Stop();
+            int ExcelTime = watch.Elapsed.Milliseconds;
+            watch.Reset();
+            watch.Start();
+
             for (int i = 0; i < arv; i++)
             {
                 //Add Grupp and get ID of it
@@ -95,12 +121,20 @@ namespace Joonas_Praktika3
                 }
 
                 //Send toode to database
-                ExcelQueries.InsertToodeToDatabase(Ex_mas[i, 2], GruppID, TootjaID, connection);
                 int TooteID = ExcelQueries.GetTooteID(Ex_mas[i, 2], connection);
+                if(TooteID == -1)
+                {
+                    ExcelQueries.InsertToodeToDatabase(Ex_mas[i, 2], GruppID, TootjaID, connection);
+                    TooteID = ExcelQueries.GetTooteID(Ex_mas[i, 2], connection);
+                }
+                
 
                 ExcelQueries.InsertNadalToDatabase(nadal, TooteID, Ex_mas[i, 3], connection);
             }
-            MessageBox.Show("Successfully imported excel to database");
+            watch.Stop();
+            int QueriesTime = watch.Elapsed.Milliseconds;
+            
+            
         }
 
         private void JO_YL3_FormClosing(object sender, FormClosingEventArgs e)
